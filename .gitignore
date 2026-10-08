@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+# callgpt.py が読む設定(起動時に環境変数から作る。API キーを含む)
+ana/pf
+.tiktoken/

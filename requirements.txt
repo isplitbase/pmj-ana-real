@@ -1,0 +1,16 @@
+# ana 本番(34.180.79.93 の py312 環境)と同じ版にそろえる
+Flask>=3.0,<4
+gunicorn>=21.2
+openai==2.15.0
+google-genai>=1.20,<2
+google-cloud-vision==3.11.0
+google-cloud-storage==3.10.1
+google-auth==2.47.0
+azure-cognitiveservices-vision-computervision==0.9.1
+msrest>=0.7
+opencv-python-headless==4.12.0.88
+numpy==2.2.6
+pillow==12.1.0
+requests==2.32.5
+python-dateutil==2.9.0.post0
+tiktoken>=0.7
