@@ -43,6 +43,7 @@ def write_pf():
         "openai_api_keys": keys,
         "gemini_api_key": os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or "",
         "aitext1": os.path.join(ANA_DIR, "aitext1"),
+        "pys_dir": ANA_DIR + "/",                         # margelist などの置き場所(末尾に / が必要)
         # 画像の保存(GCS / S3)はしない: 空にすると callgpt.py はアップロードを飛ばす
         "gcs_bucket": "",
         "google_application_credentials": "",
