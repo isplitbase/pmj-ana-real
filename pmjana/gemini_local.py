@@ -102,7 +102,17 @@ def gemini_generate(prompt: str, image_data_uri: str, timeout_sec: int = 180) ->
     last_debug = {}
     for attempt in range(max_retries + 1):
         try:
-            resp = client.models.generate_content(model=model_name, contents=[prompt, img], config=config)
+            try:
+                resp = client.models.generate_content(model=model_name, contents=[prompt, img], config=config)
+            except Exception as e:
+                # gemini-3.x-pro などは思考モード必須で thinking_budget=0 を受け付けない。
+                # その場合は思考の量を指定せず(モデルの既定で)呼び直す
+                if "only works in thinking mode" in str(e) and config.thinking_config is not None:
+                    print("[gemini_local] 思考モード必須のモデルのため、thinking_budget を指定せずに呼び直します")
+                    config = genai_types.GenerateContentConfig(temperature=temperature, max_output_tokens=max_output_tokens)
+                    resp = client.models.generate_content(model=model_name, contents=[prompt, img], config=config)
+                else:
+                    raise
             text = _extract_text_from_response(resp)
             if text:
                 return text

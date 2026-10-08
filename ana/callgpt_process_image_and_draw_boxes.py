@@ -87,7 +87,8 @@ def is_header_row(row_text):
 # --- Vision API OCR ---
 def visionAPI(fname):
     # サービスアカウントファイルのパスが存在しない場合は処理をスキップ
-    if not os.path.exists(VISION_API_ACCOUNT_FILE):
+    # [pmj-ana] Cloud Run には鍵ファイルが無く ADC を使うので、このチェックはしない
+    if False and not os.path.exists(VISION_API_ACCOUNT_FILE):
         print(
             f"警告: サービスアカウントファイルが見つかりません。Vision APIの処理をスキップします。\n"
             f"  パス: {VISION_API_ACCOUNT_FILE}"
@@ -303,7 +304,8 @@ def process_image_and_draw_boxes(input_image_path, output_image_path=None):
     """
     print(f"\n--- 処理中: {input_image_path} ---")
 
-    if not os.path.exists(VISION_API_ACCOUNT_FILE):
+    # [pmj-ana] Cloud Run には鍵ファイルが無く ADC を使うので、このチェックはしない
+    if False and not os.path.exists(VISION_API_ACCOUNT_FILE):
         print(
             f"エラー: Vision APIアカウントファイルが見つからないため、処理を中断します。\n"
             f"  パス: {VISION_API_ACCOUNT_FILE}"
