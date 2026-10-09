@@ -85,7 +85,8 @@ def to_amount(v):
         neg = True
         s = s[1:]
     if s.startswith("(") and s.endswith(")"):
-        neg = True
+        # 括弧はマイナスではない(ana のプロンプト aitext1_1「括弧付き金額の扱い」と同じ。日本の決算書では
+        # 括弧は小計・合計などの表記。マイナスは △ ▲ − で表す)
         s = s[1:-1]
     s = re.sub(r"[,，円\s]", "", s)
     if not re.fullmatch(r"\d+(\.\d+)?", s):
